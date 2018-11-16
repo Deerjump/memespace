@@ -1,12 +1,13 @@
 {
-  "name": "node-js-sample",
+  "name": "memespace",
   "version": "0.2.0",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.13.3"
   },
   "engines": {
