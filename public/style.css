@@ -19,6 +19,13 @@ img {
   height: auto;
 }
 
+#addmeme {
+   border: solid black 3px;
+   padding: 5px;
+   width: 50%;
+   margin: auto;
+}
+
 .title {
    text-decoration: none;
    color: #69C3FE;        /*baby blue*/

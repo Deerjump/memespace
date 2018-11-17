@@ -1,4 +1,5 @@
 <%- include('../modules/header', {'title': 'Memespace | Home'}); %>
+<<<<<<< Updated upstream
 <h1>Add a meme</h1>
 <form action="/upload" method="post" enctype="multipart/form-data">
   <h3>Upload a meme</h3>
@@ -7,6 +8,18 @@
   <button type="submit" name="button" class="button">Upload</button>
 </form>
 <br>
+=======
+<div id="addmeme">
+  <h1>Add a meme</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Name">
+    <br/><br/>
+    <input type="file" name="file"><br/><br/>
+    <button type="submit" name="button">Upload</button>
+  </form>
+</div>
+<br/>
+>>>>>>> Stashed changes
 <div class="meme-generator">
   <h3>Create your own memes</h3>
   <canvas id="canvas" width="1000" height="1000"></canvas>
