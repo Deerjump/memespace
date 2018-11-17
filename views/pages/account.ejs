@@ -1,5 +1,11 @@
 <%- include('../modules/header', {'title': 'Memespace | Home'}); %>
 <h1>Your account</h1>
 
-<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<form method="POST" action="/createaccount">
+
+<input type="text" name="email"> 
+<input type="password" name="password">
+
+<input type="submit"/>
+</form>
 <%- include('../modules/footer', {}); %>

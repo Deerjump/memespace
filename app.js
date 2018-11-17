@@ -10,6 +10,7 @@ app.set('port', (process.env.PORT || 8000))
   .get('/', main)
   .get('/create', create)
   .get('/account', account)
+  .post('/createaccount', createaccount)
   .get('*', send404)
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
 
@@ -35,6 +36,16 @@ function create(req, res) {
 
 function account(req, res){
   res.render('pages/account.ejs')
+}
+
+function createaccount(req, res){
+  var email = req.query.email;
+  var password= req.query.password;
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    console.log(error.code);
+    console.log(error.message);
+ });
 }
 
 function send404(req, res) {
