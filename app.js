@@ -39,6 +39,7 @@ app.set('port', (process.env.PORT || 8000))
   .get('/loginpage', loginpage)
   .get('/newaccount', newaccount)
   .get('/signout', signout)
+  .get('/likephoto', likephoto)
   .post('/login', login)
   .post('/createaccount',createaccount)
   .post('/upload', m.single('file'), uploadFileToCloudStorage)
@@ -105,6 +106,11 @@ function main(req, res) {
     }
     res.render('pages/index.ejs', {images: images, user: req.user});
   });
+}
+
+function likephoto(req, res){
+  console.log("liking a photo from the server")
+  res.end();
 }
 
 function newaccount(req, res) {
