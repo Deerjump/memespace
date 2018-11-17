@@ -8,6 +8,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
+    <script type="text/javascript">
+      function upVote() {
+        console.log("In upVote!");
+                    /*This is hard coded for now, but will be impleemented in the database for each image*/
+        votes++;
+        document.getElementById("upVotes").innerHTML = votes;
+
+      }
+    </script>
+
     <title><%= title %></title>
   </head>
   <body>

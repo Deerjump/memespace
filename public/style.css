@@ -78,6 +78,7 @@ a ~ a {
    border-color: white;
    box-sizing: border-box;
    margin: 0;
+   z-index: 1;
    }
 
 @media only screen and (max-width: 600px) {
@@ -101,11 +102,13 @@ hr {
 }
 
 .like {
+
    height: 55px;
    width: auto;
    border-radius: 50%;
    opacity: 0.5;
    transition: .2s ease;
+   z-index: 90;
 }
 
 .like:hover {
@@ -121,7 +124,7 @@ hr {
 }
 
 .button {
-    background-color: transparent; /* Green */
+    background-color: transparent;
     border: none;
     color: black;
     padding: 5px 7px;
