@@ -77,8 +77,8 @@ a ~ a {
    top: 0;
    padding-top: 2%;
    background-color: white;
-   border-bottom: solid;
-   border-color: white;
+   border-bottom: solid 1px;
+   border-color: lightgrey;
    box-sizing: border-box;
    margin: 0;
    font-size: 16px;
