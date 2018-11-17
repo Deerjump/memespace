@@ -123,10 +123,6 @@ hr {
   transform: translateY(-4px);
 }
 
-.options > a {
-  /*color: #69C3FE;*/              /*baby blue*/
-}
-
 .button {
     background-color: transparent;
     border: none;

@@ -15,6 +15,8 @@
   <h3>Create your own memes</h3>
   <canvas id="canvas" width="1000" height="1000"></canvas>
   <br/>
+  <input onkeyup="draw()" type="text" id="cap1" placeholder="TOP TEXT"><br/>
+  <input onkeyup="draw()" type="text" id="cap2" placeholder="BOTTOM TEXT"><br/>
   <a id="download-link">Download</a>
 </div>
 
@@ -27,23 +29,30 @@
     y: 100
   }];
 
-  window.onload = function() {
+  window.onload = draw;
+  function draw() {
    var canvas = document.getElementById("canvas");
    var context = canvas.getContext("2d");
    var imageObj = new Image();
    imageObj.onload = function () {
      adjust(imageObj);
      context.drawImage(imageObj, 0, 0);
-     for(var i = 0; i < textBoxes.length; i++) {
-       context.font = textBoxes[i].font;
-       context.fillStyle = textBoxes[i].fillStyle;
-       context.fillText(textBoxes[i].text, textBoxes[i].x, textBoxes[i].y);
-     }
+     context.font = imageObj.height / 10 + 'px Impact';
+     context.fillStyle = 'white';
+     context.strokeStyle = 'black';
+     context.lineWidth = imageObj.height / 200;
+     context.textAlign = 'center';
+     var topText = document.getElementById('cap1').value;
+     var btmText = document.getElementById('cap2').value;
+     context.fillText(topText, imageObj.width / 2, imageObj.height / 10);
+     context.fillText(btmText, imageObj.width / 2, imageObj.height * 9 / 10);
+     context.strokeText(topText, imageObj.width / 2, imageObj.height / 10);
+     context.strokeText(btmText, imageObj.width / 2, imageObj.height * 9 / 10);
      var downloadLink = document.getElementById('download-link');
      downloadLink.href = canvas.toDataURL();
      downloadLink.download = "your-meme.png";
    }
-   imageObj.src = "dankness.jpg";
+   imageObj.src = "like.jpg";
   };
 
   function adjust(imageObj) {

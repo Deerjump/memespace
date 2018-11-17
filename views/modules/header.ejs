@@ -3,19 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
     <script type="text/javascript">
-      function upVote() {
-        console.log("In upVote!");
-                    /*This is hard coded for now, but will be impleemented in the database for each image*/
-        votes++;
-        document.getElementById("upVotes").innerHTML = votes;
-
-      }
+        function upVote() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               
+            }
+          };
+          xhttp.open("GET", "/likephoto", true);
+          xhttp.send();
+        }
     </script>
 
     <title><%= title %></title>

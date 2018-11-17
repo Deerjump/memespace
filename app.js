@@ -39,6 +39,7 @@ app.set('port', (process.env.PORT || 8000))
   .get('/loginpage', loginpage)
   .get('/newaccount', newaccount)
   .get('/signout', signout)
+  .get('/likephoto', likephoto)
   .post('/login', login)
   .post('/createaccount',createaccount)
   .post('/upload', m.single('file'), uploadFileToCloudStorage)
@@ -54,9 +55,11 @@ function authenticate(req, res, next) {
         name: snapshot.val().username
       }
       req.user = userInfo;
+      next();
     });
+  } else {
+    next();
   }
-  next();
 }
 
 async function uploadFileToCloudStorage(req, res, next) {
@@ -76,7 +79,9 @@ async function uploadFileToCloudStorage(req, res, next) {
       firebase.database().ref('/memes').push({
         url: publicUrl,
         date: new Date().toLocaleDateString(),
-        name: req.body.name
+        rating: 0,
+        name: req.body.name,
+        user: req.user.name
       });
       res.redirect('/');
     });
@@ -86,17 +91,26 @@ async function uploadFileToCloudStorage(req, res, next) {
 
 function main(req, res) {
   var images = [];
-  firebase.database().ref('/memes').once('value').then((snapshot) => {
+  var imageRef = firebase.database().ref("/memes");
+  imageRef.once('value').then((snapshot) => {
     var arr = snapshot.val();
     for (k in arr) {
       images.push({
         name: arr[k].name,
         date: arr[k].date,
-        url: arr[k].url
+        rating: arr[k].rating,
+        url: arr[k].url,
+        user: arr[k].user
       });
+      
     }
     res.render('pages/index.ejs', {images: images, user: req.user});
   });
+}
+
+function likephoto(req, res){
+  console.log("liking a photo from the server")
+  res.end();
 }
 
 function newaccount(req, res) {
