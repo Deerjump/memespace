@@ -10,16 +10,29 @@
     <script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
     <script type="text/javascript">
-        function upVote() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               
-            }
-          };
-          xhttp.open("GET", "/likephoto", true);
-          xhttp.send();
+
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        document.getElementById("header").style.fontSize = "12px";
+        document.getElementById("logo").style.height = "55px";
+      } else {
+        document.getElementById("header").style.fontSize = "16px";
+        document.getElementById("logo").style.height = "80px";
+      }
+    }
+
+    function upVote() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
         }
+      };
+      xhttp.open("GET", "/likephoto", true);
+      xhttp.send();
+    }
     </script>
 
     <title><%= title %></title>
@@ -35,10 +48,10 @@
     </script>
   </head>
   <body>
-    <div class="header">
+    <div class="header" id="header">
     <h1><a href="/" class="title">memespace</a></h1>
     <a href="/" class="logo">
-      <img src="memespace.png" alt="memespace" style="width: auto; height: 80px; max-height: 100%">
+      <img src="memespace.png" alt="memespace" id="logo" style="width: auto; height: 80px; max-height: 100%">
     </a>
        <div class="flex-box">
           <div class="options">
