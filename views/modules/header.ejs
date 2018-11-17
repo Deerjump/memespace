@@ -13,15 +13,17 @@
   <body>
     <div class="header">
     <h1><a href="/" class="title">memespace</a></h1>
-    <a href="/" class="logo">logo</a>
+    <a href="/" class="logo">
+      <img src="memespace.png" alt="memespace" style="width: auto; height: 80px; max-height: 100%">
+    </a>
        <div class="flex-box">
           <div class="options">
              <a href="create">Create Meme</a>
              <% if(loggedin) { %>
                <a href="/signout">Signout</a>
-             <%}else{%>         
+             <%}else{%>
                <a href="/loginpage">Login/Sign Up</a>
-             <%}%>          
+             <%}%>
           </div>
        </div>
     </div>
