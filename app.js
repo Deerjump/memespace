@@ -102,7 +102,7 @@ function main(req, res) {
         url: arr[k].url,
         user: arr[k].user
       });
-      
+
     }
     res.render('pages/index.ejs', {images: images, user: req.user});
   });
@@ -118,7 +118,16 @@ function newaccount(req, res) {
 }
 
 function create(req, res){
-  res.render('pages/create.ejs', {user: req.user});
+  var templateURLs = [
+    "1438173668-cute-success-kid.jpg",
+    "Bad_Luck_Brian.jpg",
+    "GoodGuyGreg.jpg",
+    "One-Does-Not-Simply.jpg",
+    "Philosoraptor.jpg",
+    "Screen_Shot_2016_11_17_at_10.53.53_AM.0.png",
+    "Socially-Awesome-Awkward-Penguin.jpg"
+  ];
+  res.render('pages/create.ejs', {user: req.user, thumbnails: templateURLs});
 }
 
 function loginpage(req, res){
