@@ -96,12 +96,6 @@ a ~ a {
    background-color: white;
 }
 
-@media only screen and (max-width: 600px) {
-   .header {width: 100%; font-size: 10px; }
-   .flex-box {flex-direction: column }
-   .pic { width: 90%; height : auto; }
-}
-
 hr {
    border-top: 2px solid #69C3FE;
    margin-top: 3%;
@@ -161,7 +155,7 @@ canvas {
 }
 
 .meme-generator {
-   max-width: 50%;
+   width: 50%;
    height: auto;
    border: solid #69C3FE 3px;
    margin: auto;
@@ -225,4 +219,12 @@ canvas {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+   .header {width: 100%; font-size: 10px; }
+   .flex-box {flex-direction: column }
+   .pic { width: 90%; height : auto; }
+   #addmeme { width: 90%; height: auto; }
+   .meme-generator { width: 90%; height: auto; }
 }
