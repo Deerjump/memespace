@@ -11,6 +11,7 @@ body {
   /*color: #69C3FE;*/      /*baby blue*/
   color: black;
   background-color: #F4F4F4;
+  margin: 0;
 }
 
 img {
@@ -93,7 +94,7 @@ a ~ a {
 }
 
 hr {
-   border-top: 2px solid #E5E501/*#69C3FE*/;
+   border-top: 2px solid #69C3FE;
    margin-top: 3%;
    margin-bottom: 3%;
 }
@@ -102,10 +103,20 @@ hr {
    height: 55px;
    width: auto;
    border-radius: 50%;
+   opacity: 0.5;
+   transition: .2s ease;
+}
+
+.like:hover {
+  opacity: 1;
+}
+
+.like:active {
+  transform: translateY(-4px);
 }
 
 .options > a {
-  color: #69C3FE;              /*baby blue*/
+  /*color: #69C3FE;*/              /*baby blue*/
 }
 
 .button {
@@ -121,6 +132,20 @@ hr {
     cursor: pointer;
     font-family: arial black;
     color: #69C3FE;              /*baby blue*/
+}
+
+.icon {
+  font-family: 'Material Icons';
+  text-decoration: none;
+  font-size: 30px;
+}
+
+.orange {
+  color: #F7490A;
+}
+
+.babyblue {
+  color: #69C3FE;
 }
 
 canvas {
