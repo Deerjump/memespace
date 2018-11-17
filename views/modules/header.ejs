@@ -16,8 +16,12 @@
     <a href="/" class="logo">logo</a>
        <div class="flex-box">
           <div class="options">
-             <a href="create">Go to create</a>
-             <a href="account">Go to account</a>
+             <a href="create">Create Meme</a>
+             <% if(loggedin) { %>
+               <a href="/signout">Signout</a>
+             <%}else{%>         
+               <a href="/loginpage">Login/Sign Up</a>
+             <%}%>          
           </div>
        </div>
     </div>

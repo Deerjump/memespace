@@ -1,0 +1,16 @@
+<%- include('../modules/header', {'title': 'Memespace | Home', 'loggedin' :loggedin}); %>
+<h1>Your account</h1>
+<form method="POST" action="/createaccount">
+
+    <label for="email">Email:</label>
+    <input type="text" name="email">
+
+    <label for="username">Username</label>
+    <input type="text" name="username">
+    
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+
+<input type="submit"/>
+</form>
+<%- include('../modules/footer', {}); %>

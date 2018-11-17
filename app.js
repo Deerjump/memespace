@@ -34,7 +34,10 @@ app.set('port', (process.env.PORT || 8000))
   .set('view engine', 'ejs')
   .get('/', main)
   .get('/create', create)
-  .get('/account', account)
+  .get('/loginpage', loginpage)
+  .get('/newaccount', newaccount)
+  .get('/signout', signout)
+  .post('/login', login)
   .post('/createaccount',createaccount)
   .post('/upload', m.single('file'), uploadFileToCloudStorage)
   .get('*', send404)
@@ -65,7 +68,13 @@ async function uploadFileToCloudStorage(req, res, next) {
 
 function main(req, res) {
 
-
+  var user = firebase.auth().currentUser;
+  var loggedin;
+  if (user) {
+    loggedin = true;
+  } else {
+    loggedin = false;
+  }
 
   var images = [
     {
@@ -79,42 +88,79 @@ function main(req, res) {
       url: "https://storage.googleapis.com/memes2018/dankness.jpg"
     }
   ]
-  res.render('pages/index.ejs', {images: images});
+  res.render('pages/index.ejs', {images: images, loggedin: loggedin});
 }
 
-function create(req, res) {
-  res.render('pages/create.ejs');
+function newaccount(req, res) {
+  var user = firebase.auth().currentUser;
+  var loggedin;
+
+  if (user) {
+    loggedin = true;
+  } else {
+    loggedin = false;
+  }
+  
+  res.render('pages/newaccount.ejs', {loggedin: loggedin});
 }
 
-function account(req, res){
-  res.render('pages/account.ejs')
+function create(req, res){
+  var user = firebase.auth().currentUser;
+  var loggedin;
+  
+  if (user) {
+    loggedin = true;
+  } else {
+    loggedin = false;
+  }
+
+  res.render('pages/create.ejs', {loggedin: loggedin})
+}
+
+function loginpage(req, res){
+  var user = firebase.auth().currentUser;
+  var loggedin;
+  
+  if (user) {
+    loggedin = true;
+  } else {
+    loggedin = false;
+  }
+
+  res.render('pages/login.ejs', {loggedin: loggedin})
 }
 
 function createaccount(req, res){
   var email = req.body.email;
   var password = req.body.password;
+  var username = req.body.username;
 
   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
     console.log(error.code);
-     console.log(error.message);
+    console.log(error.message);
   });
 
   res.redirect("/")
 }
 
-function verifylogin(req,res){
+function login(req,res){
   var email = req.body.email;
   var password = req.body.password;
 
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    console.log(error.code);
-    console.log(error.message);
-  });
+  firebase.auth().signInWithEmailAndPassword(email, password);
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      res.redirect("/");
+    } else {
+      // No user is signed in.
+    }
+    });  
 }
 
 function signout(req,res){
   firebase.auth().signOut().then(function() {
     console.log("Logged out!")
+    res.redirect('/loginpage')
 }, function(error) {
     console.log(error.code);
     console.log(error.message);
@@ -122,5 +168,15 @@ function signout(req,res){
 }
 
 function send404(req, res) {
-  res.render('pages/404');
+
+  var user = firebase.auth().currentUser;
+  var loggedin;
+  
+  if (user) {
+    loggedin = true;
+  } else {
+    loggedin = false;
+  }
+
+  res.render('pages/404', {loggedin:loggedin});
 }

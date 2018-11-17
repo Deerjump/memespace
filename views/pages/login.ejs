@@ -1,6 +1,7 @@
-<%- include('../modules/header', {'title': 'Memespace | Home'}); %>
+<%- include('../modules/header', {'title': 'Memespace | Home', 'loggedin' :loggedin}); %>
+
 <h1>Your account</h1>
-<form method="POST" action="/createaccount">
+<form method="POST" action="/login">
 
     <label for="email">Email:</label>
     <input type="text" name="email">
