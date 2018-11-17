@@ -21,7 +21,12 @@
     <title><%= title %></title>
     <script type="text/javascript">
       function tryThis() {
-        alert('hello');
+        var dropDown = document.getElementById('drop-down');
+        if (dropDown.classList.contains('visible')) {
+          dropDown.classList = [];
+        } else {
+          dropDown.classList.add('visible');
+        }
       }
     </script>
   </head>
@@ -35,7 +40,7 @@
           <div class="options">
              <a href="create" class="icon orange">add_circle</a>
              <a onclick="tryThis()" class="icon babyblue">account_circle</a>
-             <div class="drop-down">
+             <div id="drop-down">
                 <ul>
                   <% if (user) { %>
                   <li><%= user.name %></li>
@@ -43,7 +48,7 @@
                     <a href="#">Your memes</a>
                   </li>
                   <li>
-                    <a href="/signout">Your memes</a>
+                    <a href="/signout">Logout</a>
                   </li>
                   <%}else{%>
                     <li>

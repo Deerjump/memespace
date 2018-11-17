@@ -53,8 +53,8 @@ function authenticate(req, res, next) {
       userInfo = {
         name: snapshot.val().username
       }
+      req.user = userInfo;
     });
-    req.user = userInfo;
   }
   next();
 }

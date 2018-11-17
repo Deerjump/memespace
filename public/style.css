@@ -145,6 +145,7 @@ hr {
   font-family: 'Material Icons';
   text-decoration: none;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .orange {
@@ -165,4 +166,46 @@ canvas {
    border: solid #69C3FE 3px;
    margin: auto;
    background-color: white;
+}
+
+#drop-down {
+  background: white;
+  position: absolute;
+  right: 0;
+  width: 150px;
+  height: 0px;
+  max-height: 0px;
+  transition: max-height 500ms;
+  overflow: hidden;
+}
+
+#drop-down ul {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#drop-down ul li {
+  margin: none;
+  padding: 10px 5px 10px;
+  width: 100%;
+  text-align: left;
+}
+
+#drop-down ul li:hover {
+  background: lightgrey;
+}
+
+#drop-down ul li a {
+  display: block;
+  padding: 10px 5px 10px;
+  text-align: left;
+  text-decoration: none;
+  color: black;
+}
+
+#drop-down.visible {
+  height: auto;
+  max-height: 200px;
 }
