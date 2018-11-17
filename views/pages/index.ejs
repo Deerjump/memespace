@@ -6,8 +6,12 @@
   <div class="pic">
     <h2><%= images[i].name %></h2>
     <img src="<%= images[i].url %>" alt="">
+    <br>
     <small><%= images[i].date %></small>
+    <br>
+    <input type="image" src="like.jpg" alt="like Button" class="like" onclick="">   <!-- Like Button -->
  </div>
+ <hr width="60%">
   <% } } %>
 </main>
 <%- include('../modules/footer', {}); %>

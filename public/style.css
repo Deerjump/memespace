@@ -2,10 +2,8 @@
    text-align: center;
 }
 
-body:not(.header) {
-   margin-top: 20%;
-   /*margin-left: 5%;*/
-   /*margin-right: 5%;*/
+body:not(.header) {      /*Make sure the body leaves room for the header*/
+   margin-top: 15%;
 }
 
 body {
@@ -14,11 +12,18 @@ body {
 }
 
 img {
-  max-width: 300px;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+
+.title {
+   text-decoration: none;
+   color: white;
 }
 
 .flex-box {
-   display: flex;
+   display: flex;             /*~weird flex, but ok*/
    flex-direction: row;
    flex-wrap: wrap;
    flex-flow: row;
@@ -26,7 +31,7 @@ img {
    align-items: center;
 }
 
-.options {
+.options {                   /*For the two options on the top right of the screen*/
    position: absolute;
    top: 53%;
    right: 1%;
@@ -34,7 +39,7 @@ img {
 }
 
 a ~ a {
-padding-left: 20px;
+   padding-left: 20px;      /*For space in between "create" and "go to account"*/
 }
 
 .logo {
@@ -49,7 +54,7 @@ padding-left: 20px;
 }
 
 .header {
-   /*flex: 100%;*/
+   /*flex: 100%;*/ /*~weird flex, but ok*/
    width: 100%;
    position: fixed;
    top: 0;
@@ -58,15 +63,38 @@ padding-left: 20px;
    color: white;
    border-bottom: solid;
    border-color: #9C2DFE;
+   box-sizing: border-box;
+   margin: 0;
+   }
+
+@media only screen and (max-width: 600px) {
+   .header {width: 100%; font-size: 10px; }
+   .flex-box {flex-direction: column }
+
+
 }
 
 .pic {
    flex: 50%;
    border-style: solid;
    border-color: blue;
-   border
+   max-width: 40%;
+   margin: auto;
 }
 
 body > a {
 
 }
+
+hr {
+   border-top: 2px solid #9C2DFE;
+   margin-top: 3%;
+   margin-bottom: 3%;
+}
+
+.like {
+   height: 55px;
+   width: auto;
+}
+
+
