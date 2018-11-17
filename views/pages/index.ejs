@@ -9,14 +9,27 @@
     <br>
     <small><%= "Uploaded " + images[i].date + " by " + (images[i].user == null ? 'anonymous' : images[i].user) %></small>
     <br>
-    <span><%= "Upvotes:" + images[i].rating %><div id="upVotes"></div></span>
+    <span>Upvotes:<div id="<%= "upVotes" + i %>"><%= images[i].rating %></div></span>
     <!-- The following is hardcoded...for now - will be omplemented in database -->
 
-    <input type="image" src="like.jpg" alt="like Button" class="like" onclick="upVote()">    <!-- Like Button -->
-     
+    <input type="image" src="like.jpg" alt="like Button" class="like" onclick="upVote(<%= i%>)">    <!-- Like Button -->
+
    </div>
  <hr width="65%">
 
   <% } } %>
 </main>
+<script type="text/javascript">
+  function upVote(i) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var upVotes = document.getElementById("upVotes" + i);
+        upVotes.innerHTML++;
+      }
+    };
+    xhttp.open("GET", "/likephoto", true);
+    xhttp.send();
+  }
+</script>
 <%- include('../modules/footer', {}); %>
