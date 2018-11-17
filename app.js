@@ -14,7 +14,19 @@ app.set('port', (process.env.PORT || 8000))
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
 
 function main(req, res) {
-  res.render('pages/index.ejs');
+  var images = [
+    {
+      name: "Wow this a cool meme",
+      date: "2018-11-16",
+      url: "https://storage.googleapis.com/memes2018/alphameme.jpg"
+    },
+    {
+      name: "Another true gem",
+      date: "2218-11-16",
+      url: "https://storage.googleapis.com/memes2018/dankness.jpg"
+    }
+  ]
+  res.render('pages/index.ejs', {images: images});
 }
 
 function create(req, res) {
