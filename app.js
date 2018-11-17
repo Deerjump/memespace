@@ -1,5 +1,17 @@
 var express = require('express')
 var app = express()
+var firebase = require("firebase");
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAvZa2qG10RV63Hy90NWy0K7d5eWycS1AA",
+    authDomain: "invertible-now-222800.firebaseapp.com",
+    databaseURL: "https://invertible-now-222800.firebaseio.com",
+    projectId: "invertible-now-222800",
+    storageBucket: "invertible-now-222800.appspot.com",
+    messagingSenderId: "556107747776"
+  };
+  firebase.initializeApp(config);
 
 app.set('port', (process.env.PORT || 8000))
   .use(express.static(__dirname + '/public'))
@@ -39,13 +51,16 @@ function account(req, res){
 }
 
 function createaccount(req, res){
-  var email = req.query.email;
-  var password= req.query.password;
+  var email = req.body.email;
+  var password= req.body.password;
+  console.log(email, password)
 
   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
     console.log(error.code);
     console.log(error.message);
  });
+
+ res.redirect("/");
 }
 
 function send404(req, res) {
