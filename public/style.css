@@ -1,5 +1,6 @@
 * {
    text-align: center;
+   box-sizing: border-box;
 }
 
 body:not(.header) {      /*Make sure the body leaves room for the header*/
@@ -150,5 +151,12 @@ hr {
 
 canvas {
   max-width: 90%;
+}
+
+.meme-generator {
+   max-width: 50%;
+   height: auto;
+   border: solid black 3px;
+   margin: auto;
 }
 
