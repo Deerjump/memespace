@@ -1,49 +1,61 @@
-<%- include('../modules/header', {'title': 'Memespace | Home', 'loggedin' :loggedin}); %>
-
-<h1>Create</h1>
-
+<%- include('../modules/header', {'title': 'Memespace | Home'}); %>
+<h1>Add a meme</h1>
 <form action="/upload" method="post" enctype="multipart/form-data">
-  <input type="file" name="file">
-  <p>Input top text:</p>
-  <input type="text" name="toptext">
-  <p>Input bottom text:</p>
-  <input type="text" name="bottomtext">
-  <br/><br/>
+  <h3>Upload a meme</h3>
+  <input type="text" name="name" placeholder="Name"><br />
+  <input type="file" name="file"><br />
   <button type="submit" name="button">Upload</button>
 </form>
-
-<canvas id="canvas" width="1000" height="1000"></canvas>
-<a id="download-link">Download</a>
+<br>
+<div class="meme-generator">
+  <h3>Create your own memes</h3>
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+  <a id="download-link">Download</a>
+</div>
 
 <script type="text/javascript">
+  var textBoxes = [{
+    font: '40px Impact',
+    fillStyle: 'white',
+    text: 'MY TEXT YO',
+    x: 100,
+    y: 100
+  }];
+
   window.onload = function() {
    var canvas = document.getElementById("canvas");
    var context = canvas.getContext("2d");
    var imageObj = new Image();
-   imageObj.onload = function() {
-     var longSide = 'width';
-     var shortSide = 'height';
-     if (imageObj.height > imageObj.width) {
-       shortSide = 'width';
-       longSide = 'height';
-     }
-     var ratio = imageObj[shortSide] / imageObj[longSide];
-     if (longSide > 1000) {
-       imageObj[shortSide] = 1000 * ratio;
-       imageObj[longSide] = 1000;
-     }
-     canvas[shortSide] = imageObj[shortSide];
-     canvas[longSide] = imageObj[longSide];
+   imageObj.onload = function () {
+     adjust(imageObj);
      context.drawImage(imageObj, 0, 0);
-     context.font = "20px Calibri";
-     context.fillStyle = "white";
-     context.fillText("My TEXT!", 50, 200);
+     for(var i = 0; i < textBoxes.length; i++) {
+       context.font = textBoxes[i].font;
+       context.fillStyle = textBoxes[i].fillStyle;
+       context.fillText(textBoxes[i].text, textBoxes[i].x, textBoxes[i].y);
+     }
      var downloadLink = document.getElementById('download-link');
      downloadLink.href = canvas.toDataURL();
      downloadLink.download = "your-meme.png";
-   };
+   }
    imageObj.src = "dankness.jpg";
   };
+
+  function adjust(imageObj) {
+    var longSide = 'width';
+    var shortSide = 'height';
+    if (imageObj.height > imageObj.width) {
+      shortSide = 'width';
+      longSide = 'height';
+    }
+    var ratio = imageObj[shortSide] / imageObj[longSide];
+    if (longSide > 1000) {
+      imageObj[shortSide] = 1000 * ratio;
+      imageObj[longSide] = 1000;
+    }
+    canvas[shortSide] = imageObj[shortSide];
+    canvas[longSide] = imageObj[longSide];
+  }
 </script>
 
 <%- include('../modules/footer', {}); %>

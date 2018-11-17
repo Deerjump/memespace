@@ -94,7 +94,13 @@ hr {
    border-radius: 50%;
 }
 
+<<<<<<< HEAD
 
 
 
 
+=======
+canvas {
+  max-width: 90%;
+}
+>>>>>>> Add memes and pull memes from db

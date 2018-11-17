@@ -45,7 +45,7 @@ app.set('port', (process.env.PORT || 8000))
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
 
 async function uploadFileToCloudStorage(req, res, next) {
-  const blob = bucket.file(req.file.originalname);
+  const blob = bucket.file((new Date()).getTime() + req.file.originalname);
   const blobStream = blob.createWriteStream({
     metadata: {
       contentType: req.file.mimetype
@@ -58,7 +58,12 @@ async function uploadFileToCloudStorage(req, res, next) {
     const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
 
     blob.makePublic().then(() => {
-      res.status(200).json({url: publicUrl});
+      firebase.database().ref('/memes').push({
+        url: publicUrl,
+        date: new Date().toLocaleDateString(),
+        name: req.body.name
+      });
+      res.redirect('/');
     });
   })
   .end(req.file.buffer);
@@ -73,20 +78,19 @@ function main(req, res) {
   } else {
     loggedin = false;
   }
-
-  var images = [
-    {
-      name: "Wow this a cool meme",
-      date: "2018-11-16",
-      url: "https://storage.googleapis.com/memes2018/alphameme.jpg"
-    },
-    {
-      name: "Another true gem",
-      date: "2218-11-16",
-      url: "https://storage.googleapis.com/memes2018/dankness.jpg"
+  
+  var images = [];
+  firebase.database().ref('/memes').once('value').then((snapshot) => {
+    var arr = snapshot.val();
+    for (k in arr) {
+      images.push({
+        name: arr[k].name,
+        date: arr[k].date,
+        url: arr[k].url
+      });
     }
-  ]
-  res.render('pages/index.ejs', {images: images, loggedin: loggedin});
+    res.render('pages/index.ejs', {images: images});
+  });
 }
 
 function newaccount(req, res) {
