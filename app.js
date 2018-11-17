@@ -35,6 +35,7 @@ app.set('port', (process.env.PORT || 8000))
   .get('/', main)
   .get('/create', create)
   .get('/account', account)
+  .post('/createaccount',createaccount)
   .post('/upload', m.single('file'), uploadFileToCloudStorage)
   .get('*', send404)
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
@@ -87,6 +88,37 @@ function create(req, res) {
 
 function account(req, res){
   res.render('pages/account.ejs')
+}
+
+function createaccount(req, res){
+  var email = req.body.email;
+  var password = req.body.password;
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    console.log(error.code);
+     console.log(error.message);
+  });
+
+  res.redirect("/")
+}
+
+function verifylogin(req,res){
+  var email = req.body.email;
+  var password = req.body.password;
+
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    console.log(error.code);
+    console.log(error.message);
+  });
+}
+
+function signout(req,res){
+  firebase.auth().signOut().then(function() {
+    console.log("Logged out!")
+}, function(error) {
+    console.log(error.code);
+    console.log(error.message);
+ });
 }
 
 function send404(req, res) {
