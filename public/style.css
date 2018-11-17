@@ -9,6 +9,7 @@ body:not(.header) {      /*Make sure the body leaves room for the header*/
 body {
   font-family: Roboto;
   color: blue;
+  background-color: #F4F4F4;
 }
 
 img {
@@ -19,7 +20,7 @@ img {
 
 .title {
    text-decoration: none;
-   color: white;
+   color: blue;
 }
 
 .flex-box {
@@ -59,10 +60,11 @@ a ~ a {
    position: fixed;
    top: 0;
    padding-top: 2%;
-   background-color: #9C2DFE; /*light purplish*/
+   background-color: white;
+   /*background-color: #9C2DFE;*/ /*light purplish*/
    color: white;
    border-bottom: solid;
-   border-color: #9C2DFE;
+   border-color: white;
    box-sizing: border-box;
    margin: 0;
    }
@@ -89,6 +91,10 @@ hr {
 .like {
    height: 55px;
    width: auto;
+   border-radius: 50%;
 }
+
+
+
 
 
