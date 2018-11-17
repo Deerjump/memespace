@@ -1,17 +1,22 @@
 <%- include('../modules/header', {'title': 'Memespace | Home'}); %>
-<h1>memespace</h1>
-<div class="flex-box">
-   <div class="options">
-      <a href="create">Go to create</a>
-      <a href="account">Go to account</a>
+<div class="header">
+   <h1>memespace</h1>
+   <a href="/" class="logo">logo</a>
+   <div class="flex-box">
+      <div class="options">
+         <a href="create">Go to create</a>
+         <a href="account">Go to account</a>
+      </div>
    </div>
 </div>
 <main>
   <% if (images != null) { %>
   <% for (var i = 0; i < images.length; i++) { %>
+  <div class="pic">
     <h2><%= images[i].name %></h2>
     <img src="<%= images[i].url %>" alt="">
     <small><%= images[i].date %></small>
+ </div>
   <% } } %>
 </main>
 <%- include('../modules/footer', {}); %>
