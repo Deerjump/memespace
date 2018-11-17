@@ -8,11 +8,21 @@ app.set('port', (process.env.PORT || 8000))
   .set('views', __dirname + '/views')
   .set('view engine', 'ejs')
   .get('/', main)
+  .get('/create', create)
+  .get('/account', account)
   .get('*', send404)
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
 
 function main(req, res) {
   res.render('pages/index.ejs');
+}
+
+function create(req, res) {
+  res.render('pages/create.ejs');
+}
+
+function account(req, res){
+  res.render('pages/account.ejs')
 }
 
 function send404(req, res) {
