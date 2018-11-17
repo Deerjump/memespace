@@ -1,4 +1,4 @@
-<%- include('../modules/header', {'title': 'Memespace | Home', 'loggedin' :loggedin}); %>
+<%- include('../modules/header', {'title': 'Memespace | Home', 'user' :user}); %>
 <h1>Your account</h1>
 <form method="POST" action="/createaccount">
 
@@ -7,7 +7,7 @@
 
     <label for="username">Username</label>
     <input type="text" name="username">
-    
+
     <label for="password">Password:</label>
     <input type="password" name="password">
 

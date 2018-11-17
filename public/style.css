@@ -8,6 +8,7 @@ body:not(.header) {      /*Make sure the body leaves room for the header*/
 }
 
 body {
+  margin: 0;
   font-family: Roboto;
   /*color: #69C3FE;*/      /*baby blue*/
   color: black;
@@ -162,4 +163,3 @@ canvas {
    margin: auto;
    background-color: white;
 }
-

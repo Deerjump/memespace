@@ -9,6 +9,11 @@
     <script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
     <title><%= title %></title>
+    <script type="text/javascript">
+      function tryThis() {
+        alert('hello');
+      }
+    </script>
   </head>
   <body>
     <div class="header">
@@ -19,11 +24,24 @@
        <div class="flex-box">
           <div class="options">
              <a href="create" class="icon orange">add_circle</a>
-             <% if(loggedin) { %>
-               <a href="/signout" class="Icons">person</a>
-             <%}else{%>
-               <a href="/loginpage" class="icon babyblue">account_circle</a>
-             <%}%>
+             <a onclick="tryThis()" class="icon babyblue">account_circle</a>
+             <div class="drop-down">
+                <ul>
+                  <% if (user) { %>
+                  <li><%= user.name %></li>
+                  <li>
+                    <a href="#">Your memes</a>
+                  </li>
+                  <li>
+                    <a href="/signout">Your memes</a>
+                  </li>
+                  <%}else{%>
+                    <li>
+                      <a href="/loginpage">Log in or sign up</a>
+                    </li>
+                  <%}%>
+                </ul>
+             </div>
           </div>
        </div>
     </div>
