@@ -88,8 +88,8 @@ a ~ a {
    .flex-box {flex-direction: column }
 }
 
-@media only screen and (min-width: 480px) {
-  .logo {height: 14px; width: auto;}
+@media only screen and (min-width: 750px) {
+  .logo {height: 10px; width: auto;}
 }
 
 .pic {
