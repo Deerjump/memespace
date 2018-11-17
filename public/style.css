@@ -8,6 +8,7 @@ body:not(.header) {      /*Make sure the body leaves room for the header*/
 }
 
 body {
+  margin: 0;
   font-family: Roboto;
   /*color: #69C3FE;*/      /*baby blue*/
   color: black;
@@ -22,10 +23,11 @@ img {
 }
 
 #addmeme {
-   border: solid black 3px;
+   border: solid #69C3FE 3px;
    padding: 5px;
    width: 50%;
    margin: auto;
+   background-color: white;
 }
 
 .title {
@@ -93,6 +95,7 @@ a ~ a {
    color: black;
    max-width: 40%;
    margin: auto;
+   background-color: white;
 }
 
 hr {
@@ -159,7 +162,7 @@ canvas {
 .meme-generator {
    max-width: 50%;
    height: auto;
-   border: solid black 3px;
+   border: solid #69C3FE 3px;
    margin: auto;
+   background-color: white;
 }
-

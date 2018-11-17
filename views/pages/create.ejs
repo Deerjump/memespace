@@ -1,4 +1,4 @@
-<%- include('../modules/header', {'title': 'Memespace | Home'}); %>
+<%- include('../modules/header', {'title': 'Memespace | Home', 'user': user}); %>
 
 <div id="addmeme">
 <h1>Add a meme</h1>
@@ -10,7 +10,7 @@
 </form>
 <br>
 </div>
-
+<br/>
 <div class="meme-generator">
   <h3>Create your own memes</h3>
   <canvas id="canvas" width="1000" height="1000"></canvas>

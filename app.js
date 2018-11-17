@@ -33,6 +33,7 @@ app.set('port', (process.env.PORT || 8000))
   .use(express.urlencoded({extended:true, limit: '100mb'}))
   .set('views', __dirname + '/views')
   .set('view engine', 'ejs')
+  .use(authenticate)
   .get('/', main)
   .get('/create', create)
   .get('/loginpage', loginpage)
@@ -43,6 +44,20 @@ app.set('port', (process.env.PORT || 8000))
   .post('/upload', m.single('file'), uploadFileToCloudStorage)
   .get('*', send404)
   .listen(app.get('port'), () => console.log('Listening on ' + app.get('port')));
+
+function authenticate(req, res, next) {
+  if (firebase.auth().currentUser != null) {
+    var user = firebase.auth().currentUser;
+    var userInfo;
+    firebase.database().ref('/users/' + user.uid).once('value').then((snapshot) => {
+      userInfo = {
+        name: snapshot.val().username
+      }
+    });
+    req.user = userInfo;
+  }
+  next();
+}
 
 async function uploadFileToCloudStorage(req, res, next) {
   const blob = bucket.file((new Date()).getTime() + req.file.originalname);
@@ -70,15 +85,6 @@ async function uploadFileToCloudStorage(req, res, next) {
 }
 
 function main(req, res) {
-
-  var user = firebase.auth().currentUser;
-  var loggedin;
-  if (user) {
-    loggedin = true;
-  } else {
-    loggedin = false;
-  }
-
   var images = [];
   firebase.database().ref('/memes').once('value').then((snapshot) => {
     var arr = snapshot.val();
@@ -89,47 +95,23 @@ function main(req, res) {
         url: arr[k].url
       });
     }
-    res.render('pages/index.ejs', {images: images, loggedin: loggedin});
+    res.render('pages/index.ejs', {images: images, user: req.user});
   });
 }
 
 function newaccount(req, res) {
-  var user = firebase.auth().currentUser;
-  var loggedin;
-
-  if (user) {
-    loggedin = true;
-  } else {
-    loggedin = false;
-  }
-
-  res.render('pages/newaccount.ejs', {loggedin: loggedin});
+  res.render('pages/newaccount.ejs', {user: req.user});
 }
 
 function create(req, res){
-  var user = firebase.auth().currentUser;
-  var loggedin;
-
-  if (user) {
-    loggedin = true;
-  } else {
-    loggedin = false;
-  }
-
-  res.render('pages/create.ejs', {loggedin: loggedin})
+  res.render('pages/create.ejs', {user: req.user});
 }
 
 function loginpage(req, res){
-  var user = firebase.auth().currentUser;
-  var loggedin;
-
-  if (user) {
-    loggedin = true;
-  } else {
-    loggedin = false;
+  if (req.user) {
+    return res.redirect('/');
   }
-
-  res.render('pages/login.ejs', {loggedin: loggedin})
+  res.render('pages/login.ejs', {user: req.user})
 }
 
 function createaccount(req, res){
@@ -144,6 +126,9 @@ function createaccount(req, res){
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      firebase.database().ref('/users/'+user.uid).set({
+        username: username,
+      });
       res.redirect("/");
     } else {
       // No user is signed in.
@@ -176,15 +161,5 @@ function signout(req,res){
 }
 
 function send404(req, res) {
-
-  var user = firebase.auth().currentUser;
-  var loggedin;
-
-  if (user) {
-    loggedin = true;
-  } else {
-    loggedin = false;
-  }
-
-  res.render('pages/404', {loggedin:loggedin});
+  res.render('pages/404', {user: req.user});
 }
