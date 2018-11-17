@@ -92,7 +92,7 @@ async function uploadFileToCloudStorage(req, res, next) {
 function main(req, res) {
   var images = [];
   var imageRef = firebase.database().ref("/memes");
-  imageRef.once('value').then((snapshot) => {
+  imageRef.orderByChild('date').once('value').then((snapshot) => {
     var arr = snapshot.val();
     for (k in arr) {
       images.push({
