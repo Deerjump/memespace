@@ -98,6 +98,27 @@ function createaccount(req, res){
     console.log(error.code);
      console.log(error.message);
   });
+
+  res.redirect("/")
+}
+
+function verifylogin(req,res){
+  var email = req.body.email;
+  var password = req.body.password;
+
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    console.log(error.code);
+    console.log(error.message);
+  });
+}
+
+function signout(req,res){
+  firebase.auth().signOut().then(function() {
+    console.log("Logged out!")
+}, function(error) {
+    console.log(error.code);
+    console.log(error.message);
+ });
 }
 
 function send404(req, res) {
