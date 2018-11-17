@@ -78,7 +78,7 @@ function main(req, res) {
   } else {
     loggedin = false;
   }
-  
+
   var images = [];
   firebase.database().ref('/memes').once('value').then((snapshot) => {
     var arr = snapshot.val();
@@ -89,7 +89,7 @@ function main(req, res) {
         url: arr[k].url
       });
     }
-    res.render('pages/index.ejs', {images: images});
+    res.render('pages/index.ejs', {images: images, loggedin: loggedin});
   });
 }
 
