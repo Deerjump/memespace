@@ -1,3 +1,6 @@
 <%- include('../modules/header', {'title': 'Memespace | Home'}); %>
-<h1>Creae yer own spicy meme</h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <button type="submit" name="button">Upload</button>
+</form>
 <%- include('../modules/footer', {}); %>
