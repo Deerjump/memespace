@@ -7,7 +7,7 @@
     <h2><%= images[i].name %></h2>
     <img src="<%= images[i].url %>" alt="">
     <br>
-    <small><%= images[i].date %></small>
+    <small><%= "Uploaded " + images[i].date + " by " + (images[i].user == null ? 'anonymous' : images[i].user) %></small>
     <br>
     <span>Upvotes: <div id="upVotes"></div></span>
     <!-- The following is hardcoded...for now - will be omplemented in database -->

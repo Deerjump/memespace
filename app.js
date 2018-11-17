@@ -54,9 +54,11 @@ function authenticate(req, res, next) {
         name: snapshot.val().username
       }
       req.user = userInfo;
+      next();
     });
+  } else {
+    next();
   }
-  next();
 }
 
 async function uploadFileToCloudStorage(req, res, next) {
@@ -76,7 +78,8 @@ async function uploadFileToCloudStorage(req, res, next) {
       firebase.database().ref('/memes').push({
         url: publicUrl,
         date: new Date().toLocaleDateString(),
-        name: req.body.name
+        name: req.body.name,
+        user: req.user.name
       });
       res.redirect('/');
     });
@@ -92,7 +95,8 @@ function main(req, res) {
       images.push({
         name: arr[k].name,
         date: arr[k].date,
-        url: arr[k].url
+        url: arr[k].url,
+        user: arr[k].user
       });
     }
     res.render('pages/index.ejs', {images: images, user: req.user});
