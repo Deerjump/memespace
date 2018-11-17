@@ -1,3 +1,7 @@
+* {
+   text-align: center;
+}
+
 body {
   font-family: Roboto;
   color: blue;
@@ -5,4 +9,30 @@ body {
 
 img {
   max-width: 300px;
+}
+
+.flex-box {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   flex-flow: row;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.options {
+   position: absolute;
+   top: 6%;
+   right: 1%;
+   padding-right: 2%;
+}
+
+a ~ a {
+padding-left: 20px;
+}
+
+.logo {
+   position: absolute;
+   top: 6%;
+   left: 1%;
 }

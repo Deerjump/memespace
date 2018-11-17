@@ -1,5 +1,11 @@
 <%- include('../modules/header', {'title': 'Memespace | Home'}); %>
-<h1>Hello world</h1>
+<h1>memespace</h1>
+<div class="flex-box">
+   <div class="options">
+      <a href="create">Go to create</a>
+      <a href="account">Go to account</a>
+   </div>
+</div>
 <main>
   <% if (images != null) { %>
   <% for (var i = 0; i < images.length; i++) { %>
