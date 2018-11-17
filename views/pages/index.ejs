@@ -9,11 +9,12 @@
     <br>
     <small><%= "Uploaded " + images[i].date + " by " + (images[i].user == null ? 'anonymous' : images[i].user) %></small>
     <br>
-    <span>Upvotes: <div id="upVotes"></div></span>
+    <span><%= "Upvotes:" + images[i].rating %><div id="upVotes"></div></span>
     <!-- The following is hardcoded...for now - will be omplemented in database -->
-    <script type="text/javascript">var votes = 0; document.getElementById("upVotes").innerHTML=votes;</script>
-    <input type="image" src="like.jpg" alt="like Button" class="like" onclick="upVote()">   <!-- Like Button -->
-    </div>
+
+    <input type="image" src="like.jpg" alt="like Button" class="like" onclick="upVote()">    <!-- Like Button -->
+     
+   </div>
  <hr width="65%">
 
   <% } } %>

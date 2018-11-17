@@ -78,6 +78,7 @@ async function uploadFileToCloudStorage(req, res, next) {
       firebase.database().ref('/memes').push({
         url: publicUrl,
         date: new Date().toLocaleDateString(),
+        rating: 0,
         name: req.body.name,
         user: req.user.name
       });
@@ -89,15 +90,18 @@ async function uploadFileToCloudStorage(req, res, next) {
 
 function main(req, res) {
   var images = [];
-  firebase.database().ref('/memes').once('value').then((snapshot) => {
+  var imageRef = firebase.database().ref("/memes");
+  imageRef.once('value').then((snapshot) => {
     var arr = snapshot.val();
     for (k in arr) {
       images.push({
         name: arr[k].name,
         date: arr[k].date,
+        rating: arr[k].rating,
         url: arr[k].url,
         user: arr[k].user
       });
+      
     }
     res.render('pages/index.ejs', {images: images, user: req.user});
   });
