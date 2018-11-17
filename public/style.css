@@ -63,6 +63,7 @@ a ~ a {
    position: absolute;
    top: 17%;
    left: 5%;
+   transition: 0.2s;
 }
 
 .header > .logo {
@@ -80,7 +81,9 @@ a ~ a {
    border-color: white;
    box-sizing: border-box;
    margin: 0;
+   font-size: 16px;
    z-index: 1;
+   transition: 0.2s;
    }
 
 @media only screen and (max-width: 600px) {
