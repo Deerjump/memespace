@@ -86,7 +86,10 @@ a ~ a {
 @media only screen and (max-width: 600px) {
    .header {width: 100%; font-size: 10px; }
    .flex-box {flex-direction: column }
-   .logo {height: 14px;}
+}
+
+@media only screen and (min-width: 480px) {
+  .logo {height: 14px; width: auto;}
 }
 
 .pic {
