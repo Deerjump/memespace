@@ -88,10 +88,6 @@ a ~ a {
    .flex-box {flex-direction: column }
 }
 
-@media only screen and (max-width: 750px) {
-  .logo {height: 10px; width: auto;}
-}
-
 .pic {
    flex: 50%;
    border-style: solid;
