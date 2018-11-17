@@ -1,8 +1,14 @@
 <%- include('../modules/header', {'title': 'Memespace | Home', 'loggedin' :loggedin}); %>
 
 <h1>Create</h1>
+
 <form action="/upload" method="post" enctype="multipart/form-data">
   <input type="file" name="file">
+  <p>Input top text:</p>
+  <input type="text" name="toptext">
+  <p>Input bottom text:</p>
+  <input type="text" name="bottomtext">
+  <br/><br/>
   <button type="submit" name="button">Upload</button>
 </form>
 
