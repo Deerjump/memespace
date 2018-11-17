@@ -12,4 +12,38 @@
   <button type="submit" name="button">Upload</button>
 </form>
 
+<canvas id="canvas" width="1000" height="1000"></canvas>
+<a id="download-link">Download</a>
+
+<script type="text/javascript">
+  window.onload = function() {
+   var canvas = document.getElementById("canvas");
+   var context = canvas.getContext("2d");
+   var imageObj = new Image();
+   imageObj.onload = function() {
+     var longSide = 'width';
+     var shortSide = 'height';
+     if (imageObj.height > imageObj.width) {
+       shortSide = 'width';
+       longSide = 'height';
+     }
+     var ratio = imageObj[shortSide] / imageObj[longSide];
+     if (longSide > 1000) {
+       imageObj[shortSide] = 1000 * ratio;
+       imageObj[longSide] = 1000;
+     }
+     canvas[shortSide] = imageObj[shortSide];
+     canvas[longSide] = imageObj[longSide];
+     context.drawImage(imageObj, 0, 0);
+     context.font = "20px Calibri";
+     context.fillStyle = "white";
+     context.fillText("My TEXT!", 50, 200);
+     var downloadLink = document.getElementById('download-link');
+     downloadLink.href = canvas.toDataURL();
+     downloadLink.download = "your-meme.png";
+   };
+   imageObj.src = "dankness.jpg";
+  };
+</script>
+
 <%- include('../modules/footer', {}); %>

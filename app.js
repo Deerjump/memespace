@@ -7,6 +7,7 @@ const googleCloudStorage = new Storage({
   projectId: 556107747776,
 });
 const bucket = googleCloudStorage.bucket("memes2018");
+const stream = require('stream');
 
 const firebase = require('firebase');
 var config = {
@@ -28,8 +29,8 @@ const m = multer({
 
 app.set('port', (process.env.PORT || 8000))
   .use(express.static(__dirname + '/public'))
-  .use(express.urlencoded({extended:true}))
-  .use(express.json())
+  .use(express.json({limit: '100mb'}))
+  .use(express.urlencoded({extended:true, limit: '100mb'}))
   .set('views', __dirname + '/views')
   .set('view engine', 'ejs')
   .get('/', main)
@@ -49,21 +50,18 @@ async function uploadFileToCloudStorage(req, res, next) {
     metadata: {
       contentType: req.file.mimetype
     }
-  });
-
-  blobStream.on("error", err => {
+  })
+  .on("error", err => {
     console.error(err);
-  });
-
-  blobStream.on("finish", () => {
+  })
+  .on("finish", () => {
     const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
 
     blob.makePublic().then(() => {
       res.status(200).json({url: publicUrl});
     });
-  });
-
-  blobStream.end(req.file.buffer);
+  })
+  .end(req.file.buffer);
 }
 
 function main(req, res) {
@@ -100,14 +98,14 @@ function newaccount(req, res) {
   } else {
     loggedin = false;
   }
-  
+
   res.render('pages/newaccount.ejs', {loggedin: loggedin});
 }
 
 function create(req, res){
   var user = firebase.auth().currentUser;
   var loggedin;
-  
+
   if (user) {
     loggedin = true;
   } else {
@@ -120,7 +118,7 @@ function create(req, res){
 function loginpage(req, res){
   var user = firebase.auth().currentUser;
   var loggedin;
-  
+
   if (user) {
     loggedin = true;
   } else {
@@ -146,7 +144,7 @@ function createaccount(req, res){
     } else {
       // No user is signed in.
     }
-    });  
+    });
 }
 
 function login(req,res){
@@ -160,7 +158,7 @@ function login(req,res){
     } else {
       // No user is signed in.
     }
-    });  
+    });
 }
 
 function signout(req,res){
@@ -177,7 +175,7 @@ function send404(req, res) {
 
   var user = firebase.auth().currentUser;
   var loggedin;
-  
+
   if (user) {
     loggedin = true;
   } else {
