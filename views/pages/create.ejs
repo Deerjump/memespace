@@ -17,23 +17,30 @@
   <br/>
   <input onkeyup="draw()" type="text" id="cap1" placeholder="TOP TEXT"><br/>
   <input onkeyup="draw()" type="text" id="cap2" placeholder="BOTTOM TEXT"><br/>
+
+  <div class="template-options">
+    <% for (var i = 0; i < thumbnails.length; i++) { %>
+      <div class="thumbnail">
+        <img src="<%= thumbnails[i] %>" onclick="changeImage(event)">
+      </div>
+    <% } %>
+  </div>
+
   <a id="download-link">Download</a>
 </div>
 
 <script type="text/javascript">
-  var textBoxes = [{
-    font: '40px Impact',
-    fillStyle: 'white',
-    text: 'MY TEXT YO',
-    x: 100,
-    y: 100
-  }];
-
+  var imagePath = 'like.jpg';
+  function changeImage(event) {
+    imagePath = event.srcElement.src;
+    draw();
+  }
   window.onload = draw;
   function draw() {
    var canvas = document.getElementById("canvas");
    var context = canvas.getContext("2d");
    var imageObj = new Image();
+   imageObj.crossOrigin = 'Anonymous';
    imageObj.onload = function () {
      adjust(imageObj);
      context.drawImage(imageObj, 0, 0);
@@ -52,7 +59,7 @@
      downloadLink.href = canvas.toDataURL();
      downloadLink.download = "your-meme.png";
    }
-   imageObj.src = "like.jpg";
+   imageObj.src = imagePath;
   };
 
   function adjust(imageObj) {
