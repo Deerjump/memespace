@@ -140,7 +140,13 @@ function createaccount(req, res){
     console.log(error.message);
   });
 
-  res.redirect("/")
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      res.redirect("/");
+    } else {
+      // No user is signed in.
+    }
+    });  
 }
 
 function login(req,res){
